@@ -1,0 +1,20 @@
+html {
+    font-family: Arial, Helvetica, sans-serif;
+}
+body {
+    background-image: url("img/The_Binding_of_Isaac_Rebirth_Background_Boss_Rush.webp");
+    background-size: cover;
+    color: whitesmoke;
+}
+header {
+    text-align: center;
+    border: 5px solid red;
+    margin-right: 400px;
+    margin-left: 400px;
+}
+header h1 {
+    font-size: 30px;
+}
+main {
+    text-align: center;
+}
