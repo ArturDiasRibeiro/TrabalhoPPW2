@@ -8,60 +8,35 @@ function cadastro(){
     let inputHp = document.querySelector("#BaseHP")
     let inputImg = document.querySelector("#Imagem")
 
-    if(verificaId(inputId.value)) {
-        let boss = {
-            "name": inputName.value,
-            "idboss": inputId.value,
-            "hp": inputHp.value,
-            'img': inputImg.value
-        }
     
-        // criar método POST (cadastrar) com os dados inseridos no form
-        let opcoes = {
-            method: "POST",
-            body: JSON.stringify(boss),
-            headers: {
-                "content-type": "application/json" // É só para avisar no POST que é um JSON sendo enviado
-            }
-        }
-    
-        // enviar para a URL
-        
-        let requisicao = fetch(URL, opcoes) // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
-        let dado = requisicao.then( (res) => {
-            return res.json()
-        })
-    
-        dado.then((dado) => {
-            criarBoss(dado)
-        })  
+    let boss = {
+        "name": inputName.value,
+        "idboss": inputId.value,
+        "hp": inputHp.value,
+        'img': inputImg.value
     }
     
-}
-
-// se não existir nenhum id igual, a função retorna true e entra no if da função de cadastro
-async function verificaId(id) {
-    let requisicao = await fetch(URL)
-    //Cria uma lista JSON do URL para ser usado para listar os boss
-    let dado = requisicao.then((response) => {
-      return response.json()
+    // Criar método POST (cadastrar) com os dados inseridos no form
+    let opcoes = {
+        method: "POST",
+        body: JSON.stringify(boss),
+        headers: {
+            "content-type": "application/json" // É só para avisar no POST que é um JSON sendo enviado
+        }
+    }
+    
+    // Enviar para a URL  
+    let requisicao = fetch(URL, opcoes) // https://developer.mozilla.org/en-US/docs/Web/API/Fetch_API/Using_Fetch
+    let dado = requisicao.then( (res) => {
+        return res.json()
     })
     
     dado.then((dado) => {
-      dado.forEach(boss => {
-        // Comparar ID dos itens cadastrados com o que foi informado
-        if(boss.idboss === id) {
-            alert("ID já existente, informe um novo valor!")
-
-            return false 
-        }
-      });
-    })
-
-    return true
+        criarBoss(dado)
+    })  
 }
 
-// chamar a função criarBoss() a cada item do JSON
+// Chamar a função criarBoss() a cada item do JSON
 function listarBoss() {
     let requisicao = fetch(URL)
     let dado = requisicao.then((response) => {
@@ -75,7 +50,7 @@ function listarBoss() {
     })
 }
 
-// criar elementos no html
+// Criar elementos no html
 function criarBoss(bossInfo) {
     let lista = document.querySelector("#listaBoss")
 
@@ -112,11 +87,11 @@ function criarBoss(bossInfo) {
 
     divInfo.appendChild(btnExcluir)
 
-    // adicionar na lista
+    // Adicionar na lista
     lista.appendChild(divInfo)
 }
 
-// excluir boss de acordo com ID
+// Excluir boss de acordo com ID
 function excluirBoss(id) {
     let opcoes = {
         method: 'DELETE',
@@ -133,5 +108,5 @@ function excluirBoss(id) {
     })
 }
 
-// chamar função de listar
+// Chamar função de listar
 listarBoss()
